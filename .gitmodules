@@ -1,0 +1,3 @@
+[submodule "config/nuget"]
+	path = config/nuget
+	url = https://github.com/nemonuri/nuget-config.git
