@@ -1,0 +1,32 @@
+<Project>
+
+  <PropertyGroup>
+    <RepositoryUrl Condition="'$(RepositoryUrl)' == ''">
+      https://github.com/nemonuri/log-text
+    </RepositoryUrl>
+
+    <PackageLicenseExpression Condition="'$(PackageLicenseExpression)' == ''">
+      MIT
+    </PackageLicenseExpression>
+
+    <Authors Condition="'$(Authors)' == ''">
+      Nemonuri
+    </Authors>
+
+    <Description Condition="'$(Description)' == ''">
+      $(RepositoryUrl)
+    </Description>
+
+    <PackageIconPath Condition="'$(PackageIconPath)' == ''">
+      $(ResourceDirectory)icon_128x128.png
+    </PackageIconPath>
+
+    <PackageReadmeFilePath Condition="'$(PackageReadmeFilePath)' == ''">
+      $(ResourceDirectory)README.md
+    </PackageReadmeFilePath>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)Version.Default.props" />
+  <Import Project="$(MSBuildThisFileDirectory)Pack.Common.props" />
+  
+</Project>

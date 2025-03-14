@@ -4,6 +4,15 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace>Nemonuri.LogTexts</RootNamespace>
   </PropertyGroup>
+
+  <!-- NugetConfig -->
+    <Import Project="$(NugetConfigDirectory)*.props" Condition='false' />
+  <!-- /NugetConfig -->
+
+  <!-- Pack -->
+    <Import Project="$(PackConfigDirectory)Pack.Default.props" />
+  <!-- /Pack -->
 
 </Project>
