@@ -1,13 +1,58 @@
-﻿namespace Nemonuri.LogTexts;
+﻿using System.Text;
+
+namespace Nemonuri.LogTexts;
 
 public class CollectionLogTextTheory
 {
-    public static string ToLogString<T>(T[] source)
-    {
-        return $"[{string.Join(", ", source)}]";
-    }
+    public static string ToLogString<T>(T[] source) => ToLogString(source.AsSpan());
     
     public static string ToLogString<T>(Span<T> source) => ToLogString((ReadOnlySpan<T>)source);
 
-    public static string ToLogString<T>(ReadOnlySpan<T> source) => ToLogString(source.ToArray());
+    public static string ToLogString<T>(ReadOnlySpan<T> source) => ToLogString<T>
+    (
+        source: source,
+        left: "[",
+        right: "]",
+        seperator: ",",
+        width: 0
+    );
+
+    public static string ToLogString<T>
+    (
+        ReadOnlySpan<T> source,
+        string left,
+        string right,
+        string seperator,
+        int width
+    )
+    {
+        int innerWidth = width <= 0 ? int.MaxValue : width;
+
+        StringBuilder sb = new StringBuilder();
+
+        int currentIndex = 0;
+        foreach (T item in source)
+        {
+            if (currentIndex == 0)
+            {
+                sb.Append(left);
+            }
+            else
+            {
+                sb.Append(seperator);
+            }
+
+            sb.Append(item);
+            
+            currentIndex++;
+
+            if (currentIndex >= innerWidth)
+            {
+                sb.Append(right);
+                currentIndex = 0;
+            }
+        }
+
+        return sb.ToString();
+    }
 }
