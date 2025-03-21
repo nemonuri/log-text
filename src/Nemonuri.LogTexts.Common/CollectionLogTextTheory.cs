@@ -26,7 +26,15 @@ public class CollectionLogTextTheory
         int width
     )
     {
-        int innerWidth = width <= 0 ? int.MaxValue : width;
+        int correctedWidth = width;
+        if 
+        (
+            width <= 0 ||
+            width > source.Length
+        )
+        {
+            correctedWidth = source.Length;
+        }
 
         StringBuilder sb = new StringBuilder();
 
@@ -46,7 +54,7 @@ public class CollectionLogTextTheory
             
             currentIndex++;
 
-            if (currentIndex >= innerWidth)
+            if (currentIndex >= correctedWidth)
             {
                 sb.Append(right);
                 currentIndex = 0;
